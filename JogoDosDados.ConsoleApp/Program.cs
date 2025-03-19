@@ -33,7 +33,6 @@ namespace JogoDosDados.ConsoleApp
             }
         }
 
-
     }//fim da classe program
 }
         
