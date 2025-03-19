@@ -37,7 +37,7 @@ namespace JogoDosDados.ConsoleApp
                         Console.ReadLine();
 
                         int dadoUsuario = SortearDado();
-     
+
                         Console.WriteLine("----------------------------------");
                         Console.WriteLine($"O valor sorteado foi: {dadoUsuario}!");
                         Console.WriteLine("----------------------------------");
@@ -45,35 +45,8 @@ namespace JogoDosDados.ConsoleApp
                         posicaoUsuario += dadoUsuario;
 
                         Console.WriteLine($"Você vai avançar para a posição: {posicaoUsuario} de {limiteLinhaChegada}!");
-
-                        if (posicaoUsuario == 5 || posicaoUsuario == 10 || posicaoUsuario == 15 || posicaoUsuario == 25)
-                        {
-                            Console.WriteLine("----------------------------------");
-                            Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
-
-                            posicaoUsuario += 3;
-
-                            Console.WriteLine($"Você avançou para a posição: {posicaoUsuario}!");
-                            Console.WriteLine("----------------------------------");
-
-                        }
-                        else if (posicaoUsuario == 7 || posicaoUsuario == 13 || posicaoUsuario == 20 || posicaoUsuario == 26)
-                        {
-                            Console.WriteLine("----------------------------------");
-                            Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
-
-                            posicaoUsuario -= 2;
-
-                            Console.WriteLine($"Você recuou para a posição: {posicaoUsuario}!");
-                            Console.WriteLine("----------------------------------");
-                        }
-
-                        if (posicaoUsuario >= limiteLinhaChegada)
-                        {
-                            jogoEmAndamento = false;
-                            Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
-                            continue;
-                        }
+                        
+                        JogadaEspecial(posicaoUsuario);
 
                         if (dadoUsuario != 6)
                             break;
@@ -84,15 +57,20 @@ namespace JogoDosDados.ConsoleApp
                             continue;
                         }
 
-                    }
 
-                           
- // --------------------------------------------------------------------------------------------
+                        if (posicaoUsuario >= limiteLinhaChegada)
+                        {
+                            jogoEmAndamento = false;
+                            Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
+                            continue;
+                        }
+
+                    }
                     Console.WriteLine();
+  // --------------------------------------------------------------------------------------------
 
                     rodadaExtra = true;
-
-                    while(rodadaExtra)
+                    while (rodadaExtra)
                     {
                         Console.WriteLine("\n----------------------------------");
                         Console.WriteLine("------ Rodada do Computador ------");
@@ -110,27 +88,7 @@ namespace JogoDosDados.ConsoleApp
 
                         Console.WriteLine($"O Computador vai avançar para a Posição: {posicaoComputador} de {limiteLinhaChegada}!");
 
-                        if (posicaoComputador == 5 || posicaoComputador == 10 || posicaoComputador == 15 || posicaoComputador == 25)
-                        {
-                            Console.WriteLine("----------------------------------");
-                            Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
-
-                            posicaoComputador += 3;
-
-                            Console.WriteLine($"O Computador avança para a posição: {posicaoComputador}!");
-                            Console.WriteLine("----------------------------------");
-
-                        }
-                        else if (posicaoComputador == 7 || posicaoComputador == 13 || posicaoComputador == 20 || posicaoUsuario == 26)
-                        {
-                            Console.WriteLine("----------------------------------");
-                            Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
-
-                            posicaoComputador -= 2;
-
-                            Console.WriteLine($"O Computador recuou para a posição: {posicaoComputador}!");
-                            Console.WriteLine("----------------------------------");
-                        }
+                        JogadaEspecial(posicaoComputador);
 
                         if (posicaoComputador >= limiteLinhaChegada)
                         {
@@ -148,8 +106,6 @@ namespace JogoDosDados.ConsoleApp
                             continue;
                         }
                     }
-
-              
 
                     Console.ReadLine();
                 }
@@ -172,5 +128,32 @@ namespace JogoDosDados.ConsoleApp
 
             return dadoLancado;
         }
+
+        static void JogadaEspecial(int posicao)
+        {
+            if (posicao == 5 || posicao == 10 || posicao == 15 || posicao == 25)
+            {
+                Console.WriteLine("----------------------------------");
+                Console.WriteLine("EVENTO ESPECIAL: Avanço extra de 3 casas!");
+
+                posicao += 3;
+
+                Console.WriteLine($"Você avançou para a posição: {posicao}!");
+                Console.WriteLine("----------------------------------");
+
+            }
+            else if (posicao == 7 || posicao == 13 || posicao == 20 || posicao == 26)
+            {
+                Console.WriteLine("----------------------------------");
+                Console.WriteLine("EVENTO ESPECIAL: Recuo de 2 casas!");
+
+                posicao -= 2;
+
+                Console.WriteLine($"Você recuou para a posição: {posicao}!");
+                Console.WriteLine("----------------------------------");
+            }
+
+        }
+
     }
-}       
+}
