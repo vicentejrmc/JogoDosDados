@@ -6,33 +6,54 @@ namespace JogoDosDados.ConsoleApp
     {
         static void Main(string[] args)
         {
-
+            const int limiteLinhaChegada = 30;
 
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("------------------------------");
-                Console.WriteLine("------ Jogo dos Dados --------");
-                Console.WriteLine("------------------------------");
-                Console.WriteLine();
+                int posicaoJogador = 0;
+                bool jogoEmAndamento = true;
 
-                Console.Write("Aperte [ENTER] para lançar o dado...");
-                Console.ReadLine();
+                while (jogoEmAndamento)
+                {
+                    Console.Clear();
+                    Console.WriteLine("----------------------------------");
+                    Console.WriteLine("Jogo dos Dados");
+                    Console.WriteLine("----------------------------------");
 
-                Random geradorDeDadoJogado = new Random();
-                int dado = geradorDeDadoJogado.Next(1, 7);
+                    Console.Write("Pressione ENTER para lançar o dado...");
+                    Console.ReadLine();
 
-                Console.WriteLine("------------------------------");
-                Console.WriteLine($"O Dado Girou! o resultado foi: {dado}");
-                Console.WriteLine("------------------------------");
+                    Random lancadoDeDado = new Random();
 
-                Console.WriteLine("Deseja Jogar Novamente? (S/N)");
-                string continuar = (Console.ReadLine()!.ToUpper());
-                if (continuar != "S")
-                    break;    
+                    int dadoLancado = lancadoDeDado.Next(1, 7);
+
+                    Console.WriteLine("----------------------------------");
+                    Console.WriteLine($"O valor sorteado foi: {dadoLancado}!");
+                    Console.WriteLine("----------------------------------");
+
+                    posicaoJogador += dadoLancado;
+
+                    if (posicaoJogador >= limiteLinhaChegada)
+                    {
+                        jogoEmAndamento = false;
+
+                        Console.WriteLine("Parabéns! Você alcançou a linha de chegada!");
+                    }
+                    else
+                        Console.WriteLine($"Você está na posição: {posicaoJogador} de {limiteLinhaChegada}!");
+
+                    Console.WriteLine("----------------------------------");
+                    Console.ReadLine();
+                }
+
+                Console.Write("Deseja continuar? (s/N) ");
+                string opcaoContinuar = Console.ReadLine()!.ToUpper();
+
+                if (opcaoContinuar != "S")
+                    break;
+
             }
-        }
 
-    }//fim da classe program
-}
-        
+        }
+    }
+}       
